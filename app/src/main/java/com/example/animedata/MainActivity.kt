@@ -17,7 +17,9 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
+import com.example.animedata.Models.Anime
 import com.example.animedata.ui.theme.AnimeDataTheme
+import java.util.Date
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -36,6 +38,14 @@ class MainActivity : ComponentActivity() {
     }
 }
 
+private val animeList = listOf<Anime>(
+    Anime("Attack on Titan", 94, "none", Date(2013, 4, 7), "Hajime Isayama"),
+    Anime("Fullmetal Alchemist Brotherhood", 64, "none", Date(2009,4,5), "Hiromu Arakawa"),
+    Anime("Vinland Saga", 48, "none", Date(2019,7,7),"Makoto Yukimura"),
+    Anime("Code Geass", 50, "none",Date(2006, 10, 5), "Ichirō Ōkouchi"),
+    Anime("Cowboy Bebop",26, "none", Date(1998, 4, 3), "Cain Kuga")
+)
+
 @Composable
 fun MyView() {
     Row(
@@ -50,5 +60,8 @@ fun MyView() {
                 fontWeight = FontWeight.Black
             )
         )
+
+
+
     }
 }
