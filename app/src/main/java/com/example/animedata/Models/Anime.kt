@@ -1,5 +1,6 @@
 package com.example.animedata.Models
 
+import java.time.LocalDate
 import java.util.Date
 
 data class Anime(
