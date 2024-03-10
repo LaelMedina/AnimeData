@@ -1,23 +1,18 @@
 package com.example.animedata
 
 import android.os.Bundle
-import android.text.style.BackgroundColorSpan
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.animation.animateContentSize
 import androidx.compose.animation.core.LinearEasing
 import androidx.compose.animation.core.tween
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -26,7 +21,6 @@ import androidx.compose.material.icons.filled.*
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -37,21 +31,15 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.Outline
-import androidx.compose.ui.graphics.painter.Painter
-import androidx.compose.ui.layout.VerticalAlignmentLine
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.animedata.Data.AnimeList
+import com.example.animedata.Data.AnimeList.animeList
 import com.example.animedata.Models.Anime
 import com.example.animedata.ui.theme.AnimeDataTheme
 import java.text.SimpleDateFormat
-import java.time.LocalDate
-import java.time.LocalDate.parse
-import java.time.format.DateTimeFormatter
-import java.util.Date
 import java.util.Locale
 
 class MainActivity : ComponentActivity() {
@@ -71,31 +59,26 @@ class MainActivity : ComponentActivity() {
     }
 }
 
-private val animeList = listOf<Anime>(
-    Anime("Attack on Titan", 94, "none", Date(2013, 3, 7), "Hajime Isayama"),
-    Anime("Fullmetal Alchemist Brotherhood", 64, "none", Date(2009,3,5), "Hiromu Arakawa"),
-    Anime("Vinland Saga", 48, "none", Date(2019,6,7),"Makoto Yukimura"),
-    Anime("Code Geass", 50, "none",Date(2006, 9, 5), "Ichirō Ōkouchi"),
-    Anime("Cowboy Bebop",26, "none", Date(1998, 3, 3), "Cain Kuga")
-)
+
 
 @Composable
-fun MyView(animeList: List<Anime>) {
-    Row(
-        modifier = Modifier.fillMaxWidth(),
-        horizontalArrangement = Arrangement.Center
-    ) {
-        Text(
-            text = "Anime List",
-            style = TextStyle(
-                color = Color.White,
-                fontSize = 38.sp,
-                fontWeight = FontWeight.Black
-            )
-        )
-    }
+fun MyView(animeList: List<Anime> = AnimeList.animeList) {
 
-    Row {
+    Column{
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.Center
+        ) {
+            Text(
+                text = "Anime List",
+                style = TextStyle(
+                    color = Color.White,
+                    fontSize = 38.sp,
+                    fontWeight = FontWeight.Black
+                )
+            )
+        }
+
         LazyColumn(
             contentPadding = PaddingValues(all = 16.dp),
             verticalArrangement = Arrangement.spacedBy(20.dp)
@@ -104,7 +87,19 @@ fun MyView(animeList: List<Anime>) {
                 item -> ListItemRow(item)
             }
         }
+
+        IconButton(
+            onClick = {}
+        ) {
+            Icon(
+                imageVector = Icons.Filled.Add,
+                contentDescription = "Show more Information"
+            )
+        }
     }
+
+
+
 }
 
 //My Custom Adapter
@@ -127,7 +122,7 @@ fun ListItemRow(item: Anime){
                     .weight(1f)
                     .fillMaxWidth()
                     .animateContentSize(
-                        animationSpec = tween(100,0, LinearEasing)
+                        animationSpec = tween(100, 0, LinearEasing)
                     )
             ) {
                 //Anime name
@@ -177,6 +172,28 @@ fun ListItemRow(item: Anime){
                             fontSize = 14.sp
                         ),
                     )
+
+                    Row (
+                        modifier = Modifier.padding(horizontal = 10.dp, vertical = 10.dp)
+                    ){
+                        IconButton(
+                            onClick = {}
+                        ) {
+                            Icon(
+                                imageVector = Icons.Filled.Edit,
+                                contentDescription = "Show more Information"
+                            )
+                        }
+
+                        IconButton(
+                            onClick = {}
+                        ) {
+                            Icon(
+                                imageVector = Icons.Filled.Delete,
+                                contentDescription = "Show more Information"
+                            )
+                        }
+                    }
                 }
 
             }
