@@ -6,7 +6,7 @@ class AnimeStore {
 
     companion object{
         fun CreateAnime(newAnime: Anime, animeList: List<Anime>){
-
+            animeList.plus(newAnime)
         }
 
     }

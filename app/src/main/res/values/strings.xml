@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">AnimeData</string>
+    <string name="title_activity_anime_form_dialog">AnimeFormDialog</string>
 </resources>
