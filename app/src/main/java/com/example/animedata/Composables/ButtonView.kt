@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material3.AlertDialog
+import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
@@ -23,25 +24,32 @@ import com.example.animedata.Models.Anime
 
 
 @Composable
-fun ButtonView() {
+fun ButtonAdd() {
 
     var showDialog by remember { mutableStateOf(false) }
 
-    Row(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(16.dp),
-        horizontalArrangement = Arrangement.Start
-    ){
-        IconButton(
-            onClick = { showDialog = true }
-        ) {
-            Icon(
-                imageVector = Icons.Filled.Add,
-                contentDescription = "Create a new Anime Object"
-            )
-        }
+    FloatingActionButton(onClick = {
+        showDialog = true
+    }) {
+        Icon(imageVector = Icons.Filled.Add, contentDescription = "Add a new Anime to the list")
     }
+
+
+//    Row(
+//        modifier = Modifier
+//            .fillMaxWidth()
+//            .padding(16.dp),
+//        horizontalArrangement = Arrangement.Start
+//    ){
+//        IconButton(
+//            onClick = { showDialog = true }
+//        ) {
+//            Icon(
+//                imageVector = Icons.Filled.Add,
+//                contentDescription = "Create a new Anime Object"
+//            )
+//        }
+//    }
 
     AnimeFormDialog(
         showDialog = showDialog,
