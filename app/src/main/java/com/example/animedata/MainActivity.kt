@@ -51,7 +51,7 @@ import androidx.compose.ui.unit.sp
 import com.example.animedata.Composables.AnimeFormDialog
 import com.example.animedata.Composables.ButtonView
 import com.example.animedata.Composables.ListView
-import com.example.animedata.Composables.TopView
+import com.example.animedata.Composables.Toolbar
 import com.example.animedata.Data.AnimeList
 import com.example.animedata.Data.AnimeList.animeList
 import com.example.animedata.Models.Anime
@@ -75,11 +75,14 @@ class MainActivity : ComponentActivity() {
                         modifier = Modifier.fillMaxSize(),
                         verticalArrangement = Arrangement.spacedBy(10.dp)
                     ) {
-                        TopView()
+
+                        Toolbar()
 
                         ListView(animeList)
 
                         ButtonView()
+
+
                     }
 
                 }

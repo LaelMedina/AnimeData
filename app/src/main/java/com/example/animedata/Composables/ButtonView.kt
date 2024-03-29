@@ -1,6 +1,8 @@
 package com.example.animedata.Composables
 
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
@@ -25,11 +27,11 @@ fun ButtonView() {
 
     var showDialog by remember { mutableStateOf(false) }
 
-    Box(
+    Row(
         modifier = Modifier
             .fillMaxWidth()
             .padding(16.dp),
-        contentAlignment = Alignment.BottomEnd
+        horizontalArrangement = Arrangement.Start
     ){
         IconButton(
             onClick = { showDialog = true }

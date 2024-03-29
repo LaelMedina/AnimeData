@@ -28,6 +28,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -52,28 +53,28 @@ fun ListView(animeList: List<Anime> = AnimeList.animeList) {
             .fillMaxWidth(),
         contentPadding = PaddingValues(all = 16.dp),
         verticalArrangement = Arrangement.spacedBy(20.dp)
-    ){
-        items(animeList){
-                item -> ListItemRow(item)
+    ) {
+        items(animeList) { item ->
+            ListItemRow(item)
         }
     }
 }
 
 //My Custom Adapter
 @Composable
-fun ListItemRow(item: Anime){
+fun ListItemRow(item: Anime) {
 
-    var moreInformation = remember { mutableStateOf(false ) }
+    var moreInformation = rememberSaveable { mutableStateOf(false) }
 
     Box(
         modifier = Modifier
             .fillMaxWidth()
             .clip(shape = MaterialTheme.shapes.small)
             .padding(horizontal = 16.dp, vertical = 10.dp)
-    ){
-        Row (
+    ) {
+        Row(
             verticalAlignment = Alignment.CenterVertically
-        ){
+        ) {
             Column(
                 modifier = Modifier
                     .weight(1f)
@@ -101,10 +102,13 @@ fun ListItemRow(item: Anime){
                     ),
                 )
 
-                if(moreInformation.value){
+                if (moreInformation.value) {
                     //Anime Date Released
                     Text(
-                        text = "Released: " + SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(item.released),
+                        text = "Released: " + SimpleDateFormat(
+                            "dd/MM/yyyy",
+                            Locale.getDefault()
+                        ).format(item.released),
                         //text = "Released: " + parse(item.released).format(DateTimeFormatter.ofPattern("dd/MM/yyyy")),
                         style = TextStyle(
                             color = Color.White,
@@ -130,9 +134,9 @@ fun ListItemRow(item: Anime){
                         ),
                     )
 
-                    Row (
+                    Row(
                         modifier = Modifier.padding(horizontal = 10.dp, vertical = 10.dp)
-                    ){
+                    ) {
                         IconButton(
                             onClick = {}
                         ) {
@@ -165,7 +169,7 @@ fun ListItemRow(item: Anime){
                     imageVector = Icons.Filled.ArrowDropDown,
                     contentDescription = "Show more Information",
                     modifier = Modifier.rotate(
-                        if(moreInformation.value) 180f else 360f
+                        if (moreInformation.value) 180f else 360f
                     )
                 )
             }
