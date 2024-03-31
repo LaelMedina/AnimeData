@@ -1,4 +1,4 @@
-package com.example.animedata.Composables
+package com.example.animedata.composables
 
 import androidx.compose.animation.animateContentSize
 import androidx.compose.animation.core.LinearEasing
@@ -32,8 +32,8 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.animedata.Data.AnimeList
-import com.example.animedata.Models.Anime
+import com.example.animedata.data.AnimeList
+import com.example.animedata.models.Anime
 import java.text.SimpleDateFormat
 import java.util.Locale
 
@@ -43,7 +43,7 @@ fun Content(animeList: List<Anime> = AnimeList.animeList) {
 
     LazyColumn(
         modifier = Modifier
-            .fillMaxWidth(),
+            .fillMaxWidth().padding(top = 40.dp),
         contentPadding = PaddingValues(all = 16.dp),
         verticalArrangement = Arrangement.spacedBy(20.dp)
     ) {
@@ -57,7 +57,7 @@ fun Content(animeList: List<Anime> = AnimeList.animeList) {
 @Composable
 fun ListItemRow(item: Anime) {
 
-    var moreInformation = rememberSaveable { mutableStateOf(false) }
+    val moreInformation = rememberSaveable { mutableStateOf(false) }
 
     Box(
         modifier = Modifier
@@ -98,11 +98,7 @@ fun ListItemRow(item: Anime) {
                 if (moreInformation.value) {
                     //Anime Date Released
                     Text(
-                        text = "Released: " + SimpleDateFormat(
-                            "dd/MM/yyyy",
-                            Locale.getDefault()
-                        ).format(item.released),
-                        //text = "Released: " + parse(item.released).format(DateTimeFormatter.ofPattern("dd/MM/yyyy")),
+                        text = "Released: " + item.released,
                         style = TextStyle(
                             color = Color.White,
                             fontSize = 14.sp

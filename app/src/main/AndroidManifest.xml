@@ -13,7 +13,7 @@
         android:theme="@style/Theme.AnimeData"
         tools:targetApi="31">
         <activity
-            android:name=".Composables.AnimeFormDialog"
+            android:name=".composables.AnimeFormDialog"
             android:exported="false"
             android:label="@string/title_activity_anime_form_dialog"
             android:theme="@style/Theme.AnimeData" />
