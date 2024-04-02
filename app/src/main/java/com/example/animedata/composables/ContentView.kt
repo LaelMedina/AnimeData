@@ -68,6 +68,8 @@ fun ListItemRow(item: Anime) {
 
     var isEditing by remember { mutableStateOf(false) }
 
+    var isDeleting by remember { mutableStateOf(false) }
+
     Box(
         modifier = Modifier
             .fillMaxWidth()
@@ -158,15 +160,20 @@ fun ListItemRow(item: Anime) {
 
                         IconButton(
                             onClick = {
-                                //show dialog before deleting the element
-
-                                AnimeStore.deleteAnime(item.id)
+                                isDeleting = true
                             }
                         ) {
                             Icon(
                                 imageVector = Icons.Filled.Delete,
                                 contentDescription = "Delete Anime"
                             )
+                        }
+
+                        if (isDeleting) {
+                            DeleteAnimeDialog(
+                                showDialog = isDeleting,
+                                onDismiss = { isDeleting = false },
+                                onSubmit = { AnimeStore.deleteAnime(item.id) })
                         }
 
                     }

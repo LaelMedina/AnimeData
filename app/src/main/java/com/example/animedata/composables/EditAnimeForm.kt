@@ -152,10 +152,15 @@ fun EditAnimeForm(onSubmit: Boolean, onCancel: () -> Unit, initialAnime: Anime) 
                     author = author
                 )
 
-                if(!AnimeStore.editAnime(initialAnime, updatedAnime)){
-                    Toast.makeText(context, "Make sure to enter all the Information, thank you", Toast.LENGTH_LONG).show()
-                }else{
-                    Toast.makeText(context, "Action completed Successfully!", Toast.LENGTH_SHORT).show()
+                if (!AnimeStore.editAnime(initialAnime, updatedAnime)) {
+                    Toast.makeText(
+                        context,
+                        "Make sure to enter all the Information, thank you",
+                        Toast.LENGTH_LONG
+                    ).show()
+                } else {
+                    Toast.makeText(context, "Action completed Successfully!", Toast.LENGTH_SHORT)
+                        .show()
                 }
 
             }) {

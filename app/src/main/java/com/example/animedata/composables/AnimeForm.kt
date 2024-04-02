@@ -20,7 +20,6 @@ import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.currentCompositionLocalContext
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
@@ -157,10 +156,15 @@ fun AnimeForm(onSubmit: () -> Unit, onCancel: () -> Unit) {
                     author = author
                 )
 
-                if(!AnimeStore.addAnime(newAnime)){
-                    Toast.makeText(context, "Make sure to enter all the Information, thank you", Toast.LENGTH_LONG).show()
-                }else{
-                    Toast.makeText(context, "Action completed Successfully!", Toast.LENGTH_SHORT).show()
+                if (!AnimeStore.addAnime(newAnime)) {
+                    Toast.makeText(
+                        context,
+                        "Make sure to enter all the Information, thank you",
+                        Toast.LENGTH_LONG
+                    ).show()
+                } else {
+                    Toast.makeText(context, "Action completed Successfully!", Toast.LENGTH_SHORT)
+                        .show()
                 }
 
             }) {
