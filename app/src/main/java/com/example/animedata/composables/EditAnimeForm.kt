@@ -1,6 +1,7 @@
 package com.example.animedata.composables
 
 import android.widget.DatePicker
+import android.widget.Toast
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -35,7 +36,7 @@ import com.example.animedata.store.AnimeStore
 import java.util.Calendar
 
 @Composable
-fun EditAnimeForm(onSubmit: () -> Unit, onCancel: () -> Unit, initialAnime: Anime) {
+fun EditAnimeForm(onSubmit: Boolean, onCancel: () -> Unit, initialAnime: Anime) {
 
     val id: Int = initialAnime.id
 
@@ -151,7 +152,11 @@ fun EditAnimeForm(onSubmit: () -> Unit, onCancel: () -> Unit, initialAnime: Anim
                     author = author
                 )
 
-                AnimeStore.editAnime(initialAnime, updatedAnime)
+                if(!AnimeStore.editAnime(initialAnime, updatedAnime)){
+                    Toast.makeText(context, "Make sure to enter all the Information, thank you", Toast.LENGTH_LONG).show()
+                }else{
+                    Toast.makeText(context, "Action completed Successfully!", Toast.LENGTH_SHORT).show()
+                }
 
             }) {
                 Text("Save")
@@ -171,7 +176,7 @@ fun EditAnimeForm(onSubmit: () -> Unit, onCancel: () -> Unit, initialAnime: Anim
 fun EditAnimeFormDialog(
     showDialog: Boolean,
     onDismiss: () -> Unit,
-    onSubmit: () -> Unit,
+    onSubmit: Boolean,
     initialAnime: Anime
 ) {
 

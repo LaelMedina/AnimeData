@@ -151,7 +151,7 @@ fun ListItemRow(item: Anime) {
                             EditAnimeFormDialog(
                                 isEditing,
                                 onDismiss = { isEditing = false },
-                                onSubmit = {},
+                                onSubmit = true,
                                 item
                             )
                         }
