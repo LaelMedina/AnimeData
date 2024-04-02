@@ -1,5 +1,6 @@
 package com.example.animedata.store
 
+import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.TabPosition
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
@@ -24,7 +25,17 @@ class AnimeStore {
 
         }
 
-        fun editAnime(){
+        fun editAnime(initialAnime: Anime, updatedAnime: Anime){
+
+            initialAnime.name = updatedAnime.name
+
+            initialAnime.chapters = updatedAnime.chapters
+
+            initialAnime.description = updatedAnime.description
+
+            initialAnime.released = updatedAnime.released
+
+            initialAnime.author = updatedAnime.author
 
         }
 

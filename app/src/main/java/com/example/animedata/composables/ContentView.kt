@@ -16,16 +16,17 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowDropDown
 import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.Edit
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.TabPosition
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -59,10 +60,13 @@ fun Content() {
 }
 
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ListItemRow(item: Anime) {
 
     val moreInformation = rememberSaveable { mutableStateOf(false) }
+
+    var isEditing by remember { mutableStateOf(false) }
 
     Box(
         modifier = Modifier
@@ -101,7 +105,7 @@ fun ListItemRow(item: Anime) {
                 )
 
                 if (moreInformation.value) {
-                    //Anime Date Released
+                    //Anime Released Date
                     Text(
                         text = " Released: " + item.released,
                         style = TextStyle(
@@ -131,9 +135,10 @@ fun ListItemRow(item: Anime) {
                     Row(
                         modifier = Modifier.padding(horizontal = 10.dp, vertical = 10.dp)
                     ) {
+
                         IconButton(
                             onClick = {
-                                AnimeStore.editAnime()
+                                isEditing = true
                             }
                         ) {
                             Icon(
@@ -142,9 +147,19 @@ fun ListItemRow(item: Anime) {
                             )
                         }
 
+                        if (isEditing) {
+                            EditAnimeFormDialog(
+                                isEditing,
+                                onDismiss = { isEditing = false },
+                                onSubmit = {},
+                                item
+                            )
+                        }
+
                         IconButton(
                             onClick = {
                                 //show dialog before deleting the element
+
                                 AnimeStore.deleteAnime(item.id)
                             }
                         ) {
@@ -153,6 +168,7 @@ fun ListItemRow(item: Anime) {
                                 contentDescription = "Delete Anime"
                             )
                         }
+
                     }
                 }
 

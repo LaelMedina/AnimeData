@@ -14,6 +14,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.DateRange
+import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Icon
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.OutlinedTextField
@@ -32,26 +33,21 @@ import androidx.compose.ui.unit.dp
 import com.example.animedata.models.Anime
 import com.example.animedata.store.AnimeStore
 import java.util.Calendar
-import kotlin.random.Random
 
 @Composable
-fun AnimeForm(onSubmit: () -> Unit, onCancel: () -> Unit) {
+fun EditAnimeForm(onSubmit: () -> Unit, onCancel: () -> Unit, initialAnime: Anime) {
 
-    /*
-        Note: The id property of the Object is not properly initialized due to another Object might get the exact same number
-        for its id leading to possible conflicts in the future, this must be fixed as soon as possible.
-    */
-    val id: Int = Random.nextInt(5, 100001)
+    val id: Int = initialAnime.id
 
-    var name by remember { mutableStateOf("") }
+    var name by remember { mutableStateOf(initialAnime.name) }
 
-    var chapters by remember { mutableIntStateOf(0) }
+    var chapters by remember { mutableIntStateOf(initialAnime.chapters) }
 
-    var description by remember { mutableStateOf("") }
+    var description by remember { mutableStateOf(initialAnime.description) }
 
-    var released by remember { mutableStateOf("") }
+    var released by remember { mutableStateOf(initialAnime.released) }
 
-    var author by remember { mutableStateOf("") }
+    var author by remember { mutableStateOf(initialAnime.author) }
 
     val context = LocalContext.current
 
@@ -146,7 +142,7 @@ fun AnimeForm(onSubmit: () -> Unit, onCancel: () -> Unit) {
 
             OutlinedButton(onClick = {
 
-                val newAnime = Anime(
+                val updatedAnime = Anime(
                     id = id,
                     name = name,
                     chapters = chapters,
@@ -155,7 +151,7 @@ fun AnimeForm(onSubmit: () -> Unit, onCancel: () -> Unit) {
                     author = author
                 )
 
-                AnimeStore.addAnime(newAnime)
+                AnimeStore.editAnime(initialAnime, updatedAnime)
 
             }) {
                 Text("Save")
@@ -164,9 +160,35 @@ fun AnimeForm(onSubmit: () -> Unit, onCancel: () -> Unit) {
             Spacer(modifier = Modifier.width(16.dp))
 
             OutlinedButton(onClick = onCancel) {
-                Text("Cancel")
+                Text("Exit")
             }
         }
+    }
+
+}
+
+@Composable
+fun EditAnimeFormDialog(
+    showDialog: Boolean,
+    onDismiss: () -> Unit,
+    onSubmit: () -> Unit,
+    initialAnime: Anime
+) {
+
+    if (showDialog) {
+        AlertDialog(
+            onDismissRequest = onDismiss,
+            title = { Text("Edit Anime") },
+            text = {
+                EditAnimeForm(
+                    onSubmit = onSubmit,
+                    onCancel = onDismiss,
+                    initialAnime = initialAnime
+                )
+            },
+            confirmButton = {},
+            dismissButton = {}
+        )
     }
 }
 

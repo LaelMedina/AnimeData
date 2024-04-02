@@ -4,9 +4,9 @@ import java.util.Date
 
 data class Anime(
     val id: Int,
-    val name: String,
-    val chapters: Int,
-    val description: String,
-    val released: String,
-    val author: String
+    var name: String,
+    var chapters: Int,
+    var description: String,
+    var released: String,
+    var author: String
 )

@@ -38,7 +38,7 @@ class MainActivity : ComponentActivity() {
 fun ViewContainer() {
     Scaffold(
         topBar = { Toolbar() },
-        content = { Content()},
+        content = { Content() },
         floatingActionButton = { ButtonAdd() },
         floatingActionButtonPosition = FabPosition.End
     )

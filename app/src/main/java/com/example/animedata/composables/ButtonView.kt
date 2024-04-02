@@ -11,7 +11,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-import com.example.animedata.models.Anime
 
 @Composable
 fun ButtonAdd() {
@@ -36,8 +35,9 @@ fun ButtonAdd() {
 fun AnimeFormDialog(
     showDialog: Boolean,
     onDismiss: () -> Unit,
-    onSubmit: (Anime) -> Unit
+    onSubmit: () -> Unit
 ) {
+
     if (showDialog) {
         AlertDialog(
             onDismissRequest = onDismiss,
@@ -53,3 +53,5 @@ fun AnimeFormDialog(
         )
     }
 }
+
+
