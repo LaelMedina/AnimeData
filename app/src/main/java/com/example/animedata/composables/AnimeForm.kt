@@ -1,7 +1,6 @@
 package com.example.animedata.composables
 
 import android.widget.DatePicker
-import android.widget.Toast
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -31,7 +30,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
-import com.example.animedata.data.AnimeList
 import com.example.animedata.models.Anime
 import com.example.animedata.store.AnimeStore
 import java.util.Calendar
@@ -39,6 +37,7 @@ import java.util.Calendar
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AnimeForm(onSubmit: (Anime) -> Unit, onCancel: () -> Unit) {
+
     var name by remember { mutableStateOf("") }
     var chapters by remember { mutableIntStateOf(0) }
     var description by remember { mutableStateOf("") }
@@ -63,8 +62,6 @@ fun AnimeForm(onSubmit: (Anime) -> Unit, onCancel: () -> Unit) {
             released = "$day/$month/$year"
         }, year, month, day
     )
-
-
 
     Column(
         modifier = Modifier
@@ -127,24 +124,23 @@ fun AnimeForm(onSubmit: (Anime) -> Unit, onCancel: () -> Unit) {
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.Center
         ) {
+
             OutlinedButton(onClick = {
-                try {
 
-                    val newAnime = Anime(
-                        name = name,
-                        chapters = chapters,
-                        description = description,
-                        released = released,
-                        author = author,
-                    )
+                val newAnime = Anime(
+                    name = name,
+                    chapters = chapters,
+                    description = description,
+                    released = released,
+                    author = author,
+                )
 
-                    AnimeStore.CreateAnime(newAnime, AnimeList.animeList)
-                } catch (ex: Exception) {
-                    Toast.makeText(context, ex.message, Toast.LENGTH_SHORT).show()
-                }
+                AnimeStore.addAnime(newAnime)
+
             }) {
                 Text("Save")
             }
+
             Spacer(modifier = Modifier.width(16.dp))
             OutlinedButton(onClick = onCancel) {
                 Text("Cancel")
@@ -152,3 +148,4 @@ fun AnimeForm(onSubmit: (Anime) -> Unit, onCancel: () -> Unit) {
         }
     }
 }
+

@@ -41,7 +41,7 @@ fun AnimeFormDialog(
     if (showDialog) {
         AlertDialog(
             onDismissRequest = onDismiss,
-            title = { Text("Create a new Anime Object") },
+            title = { Text("Add a new Anime") },
             text = {
                 AnimeForm(
                     onSubmit = onSubmit,

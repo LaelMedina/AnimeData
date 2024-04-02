@@ -21,6 +21,8 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
@@ -32,18 +34,19 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.animedata.data.AnimeList
 import com.example.animedata.models.Anime
-import java.text.SimpleDateFormat
-import java.util.Locale
+import com.example.animedata.store.AnimeStore
 
 
 @Composable
-fun Content(animeList: List<Anime> = AnimeList.animeList) {
+fun Content() {
+
+    val animeList: List<Anime> by AnimeStore.getAnimeList()
 
     LazyColumn(
         modifier = Modifier
-            .fillMaxWidth().padding(top = 40.dp),
+            .fillMaxWidth()
+            .padding(top = 40.dp),
         contentPadding = PaddingValues(all = 16.dp),
         verticalArrangement = Arrangement.spacedBy(20.dp)
     ) {
