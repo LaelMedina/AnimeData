@@ -19,6 +19,7 @@ import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.TabPosition
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
@@ -54,9 +55,10 @@ fun Content() {
             ListItemRow(item)
         }
     }
+
 }
 
-//My Custom Adapter
+
 @Composable
 fun ListItemRow(item: Anime) {
 
@@ -101,7 +103,7 @@ fun ListItemRow(item: Anime) {
                 if (moreInformation.value) {
                     //Anime Date Released
                     Text(
-                        text = "Released: " + item.released,
+                        text = " Released: " + item.released,
                         style = TextStyle(
                             color = Color.White,
                             fontSize = 14.sp
@@ -110,7 +112,7 @@ fun ListItemRow(item: Anime) {
 
                     //Anime Total Chapters
                     Text(
-                        text = "Chapters: " + item.chapters,
+                        text = " Chapters: " + item.chapters,
                         style = TextStyle(
                             color = Color.White,
                             fontSize = 14.sp
@@ -119,7 +121,7 @@ fun ListItemRow(item: Anime) {
 
                     //Anime Description
                     Text(
-                        text = "Description: " + item.description,
+                        text = " Description: " + item.description,
                         style = TextStyle(
                             color = Color.White,
                             fontSize = 14.sp
@@ -130,20 +132,25 @@ fun ListItemRow(item: Anime) {
                         modifier = Modifier.padding(horizontal = 10.dp, vertical = 10.dp)
                     ) {
                         IconButton(
-                            onClick = {}
+                            onClick = {
+                                AnimeStore.editAnime()
+                            }
                         ) {
                             Icon(
                                 imageVector = Icons.Filled.Edit,
-                                contentDescription = "Show more Information"
+                                contentDescription = "Edit Anime"
                             )
                         }
 
                         IconButton(
-                            onClick = {}
+                            onClick = {
+                                //show dialog before deleting the element
+                                AnimeStore.deleteAnime(item.id)
+                            }
                         ) {
                             Icon(
                                 imageVector = Icons.Filled.Delete,
-                                contentDescription = "Show more Information"
+                                contentDescription = "Delete Anime"
                             )
                         }
                     }

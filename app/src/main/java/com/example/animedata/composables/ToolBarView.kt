@@ -15,6 +15,9 @@ import androidx.compose.ui.unit.sp
 @Composable
 fun Toolbar() {
 
+    /*
+        Description: Composable object that creates a UI system element that represents a NavigationBar in the application
+     */
     TopAppBar(
         title = {
             Text(

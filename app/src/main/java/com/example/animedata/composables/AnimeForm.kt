@@ -33,27 +33,47 @@ import androidx.compose.ui.unit.dp
 import com.example.animedata.models.Anime
 import com.example.animedata.store.AnimeStore
 import java.util.Calendar
+import kotlin.random.Random
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AnimeForm(onSubmit: (Anime) -> Unit, onCancel: () -> Unit) {
 
+    /*
+        Note: The id property of the Object is not properly initialized due to another Object might get the exact same number
+        for its id leading to possible conflicts in the future, this must be fixed as soon as possible.
+    */
+    val id: Int = Random.nextInt(5, 100001)
+
     var name by remember { mutableStateOf("") }
+
     var chapters by remember { mutableIntStateOf(0) }
+
     var description by remember { mutableStateOf("") }
+
     var released by remember { mutableStateOf("") }
+
     var author by remember { mutableStateOf("") }
 
     val context = LocalContext.current
 
-    //I don't know why I have to do all this shit just to set a simple date format, I hate you kotlin
+
+    /*
+    * These values represent a field in the date format, if there is a better way to work with dates in kotlin then it should be done the better way instead of this
+    * disaster to the reader.
+    * */
     val year: Int
+
     val month: Int
+
     val day: Int
 
     val calendar = Calendar.getInstance()
+
     year = calendar.get(Calendar.YEAR)
+
     month = calendar.get(Calendar.MONTH)
+
     day = calendar.get(Calendar.DAY_OF_MONTH)
 
     val mDatePickerDialog = android.app.DatePickerDialog(
@@ -128,6 +148,7 @@ fun AnimeForm(onSubmit: (Anime) -> Unit, onCancel: () -> Unit) {
             OutlinedButton(onClick = {
 
                 val newAnime = Anime(
+                    id = id,
                     name = name,
                     chapters = chapters,
                     description = description,
