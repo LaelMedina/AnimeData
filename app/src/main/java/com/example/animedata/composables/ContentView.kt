@@ -66,7 +66,7 @@ fun ListItemRow(item: Anime) {
 
     val moreInformation = remember { mutableStateOf(false) }
 
-    var isEditing by remember { mutableStateOf(false) }
+    var isEditing by rememberSaveable { mutableStateOf(false) }
 
     var isDeleting by rememberSaveable { mutableStateOf(false) }
 
@@ -149,14 +149,13 @@ fun ListItemRow(item: Anime) {
                             )
                         }
 
-                        if (isEditing) {
-                            EditAnimeFormDialog(
-                                isEditing,
-                                onDismiss = { isEditing = false },
-                                onSubmit = true,
-                                item
-                            )
-                        }
+                        EditAnimeFormDialog(
+                            isEditing,
+                            onDismiss = { isEditing = false },
+                            onSubmit = { isEditing = false },
+                            item
+                        )
+
 
                         IconButton(
                             onClick = {
@@ -177,7 +176,6 @@ fun ListItemRow(item: Anime) {
                                 isDeleting = false
                             }
                         )
-
 
                     }
                 }

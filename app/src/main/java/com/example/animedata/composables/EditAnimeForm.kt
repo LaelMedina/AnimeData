@@ -20,7 +20,6 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
@@ -37,7 +36,7 @@ import com.example.animedata.store.AnimeStore
 import java.util.Calendar
 
 @Composable
-fun EditAnimeForm(onSubmit: Boolean, onCancel: () -> Unit, initialAnime: Anime) {
+fun EditAnimeForm(onCancel: () -> Unit, initialAnime: Anime) {
 
     val id: Int = initialAnime.id
 
@@ -52,7 +51,6 @@ fun EditAnimeForm(onSubmit: Boolean, onCancel: () -> Unit, initialAnime: Anime) 
     var author by remember { mutableStateOf(initialAnime.author) }
 
     val context = LocalContext.current
-
 
     /*
     * These values represent a field in the date format, if there is a better way to work with dates in kotlin then it should be done the better way instead of this
@@ -143,7 +141,6 @@ fun EditAnimeForm(onSubmit: Boolean, onCancel: () -> Unit, initialAnime: Anime) 
         ) {
 
             OutlinedButton(onClick = {
-
                 val updatedAnime = Anime(
                     id = id,
                     name = name,
@@ -163,7 +160,6 @@ fun EditAnimeForm(onSubmit: Boolean, onCancel: () -> Unit, initialAnime: Anime) 
                     Toast.makeText(context, "Action completed Successfully!", Toast.LENGTH_SHORT)
                         .show()
                 }
-
             }) {
                 Text("Save")
             }
@@ -171,39 +167,33 @@ fun EditAnimeForm(onSubmit: Boolean, onCancel: () -> Unit, initialAnime: Anime) 
             Spacer(modifier = Modifier.width(16.dp))
 
             OutlinedButton(onClick = onCancel) {
-                Text("Cancel")
+                Text("Exit")
             }
+
         }
     }
-
 }
 
 @Composable
 fun EditAnimeFormDialog(
     showDialog: Boolean,
     onDismiss: () -> Unit,
-    onSubmit: Boolean,
+    onSubmit: () -> Unit,
     initialAnime: Anime
 ) {
 
     if (showDialog) {
         AlertDialog(
-            onDismissRequest = onDismiss,
+            onDismissRequest = {},
             title = { Text("Edit Anime") },
             text = {
                 EditAnimeForm(
-                    onSubmit = onSubmit,
                     onCancel = onDismiss,
                     initialAnime = initialAnime
                 )
             },
-            confirmButton = {
-//                TextButton(onClick = { /*TODO*/ }) {
-//
-//                }
-            },
+            confirmButton = {},
             dismissButton = {}
         )
     }
 }
-

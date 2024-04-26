@@ -165,6 +165,17 @@ fun AnimeForm(onSubmit: () -> Unit, onCancel: () -> Unit) {
                 } else {
                     Toast.makeText(context, "Action completed Successfully!", Toast.LENGTH_SHORT)
                         .show()
+
+                    name = ""
+
+                    chapters = 0
+
+                    description = ""
+
+                    released = ""
+
+                    author = ""
+
                 }
 
             }) {

@@ -41,8 +41,6 @@ class AnimeStore {
 
                 true
             }
-
-
         }
 
         fun deleteAnime(animeId: Int): Boolean {
