@@ -64,11 +64,11 @@ fun Content() {
 @Composable
 fun ListItemRow(item: Anime) {
 
-    val moreInformation = rememberSaveable { mutableStateOf(false) }
+    val moreInformation = remember { mutableStateOf(false) }
 
     var isEditing by remember { mutableStateOf(false) }
 
-    var isDeleting by remember { mutableStateOf(false) }
+    var isDeleting by rememberSaveable { mutableStateOf(false) }
 
     Box(
         modifier = Modifier
@@ -169,12 +169,15 @@ fun ListItemRow(item: Anime) {
                             )
                         }
 
-                        if (isDeleting) {
-                            DeleteAnimeDialog(
-                                showDialog = isDeleting,
-                                onDismiss = { isDeleting = false },
-                                onSubmit = { AnimeStore.deleteAnime(item.id) })
-                        }
+                        DeleteAnimeDialog(
+                            showDialog = isDeleting,
+                            onDismiss = { isDeleting = false },
+                            onSubmit = {
+                                AnimeStore.deleteAnime(item.id)
+                                isDeleting = false
+                            }
+                        )
+
 
                     }
                 }

@@ -20,6 +20,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
@@ -170,7 +171,7 @@ fun EditAnimeForm(onSubmit: Boolean, onCancel: () -> Unit, initialAnime: Anime) 
             Spacer(modifier = Modifier.width(16.dp))
 
             OutlinedButton(onClick = onCancel) {
-                Text("Exit")
+                Text("Cancel")
             }
         }
     }
@@ -196,7 +197,11 @@ fun EditAnimeFormDialog(
                     initialAnime = initialAnime
                 )
             },
-            confirmButton = {},
+            confirmButton = {
+//                TextButton(onClick = { /*TODO*/ }) {
+//
+//                }
+            },
             dismissButton = {}
         )
     }
