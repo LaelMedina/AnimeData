@@ -1,7 +1,9 @@
 package com.example.animedata.composables
 
+import android.os.Build
 import android.widget.DatePicker
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -31,14 +33,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
+import com.example.animedata.data.AnimesDatabaseHelper
 import com.example.animedata.models.Anime
 import com.example.animedata.store.AnimeStore
 import java.util.Calendar
 
+@RequiresApi(Build.VERSION_CODES.P)
 @Composable
 fun EditAnimeForm(onCancel: () -> Unit, initialAnime: Anime) {
-
-    val id: Int = initialAnime.id
 
     var name by remember { mutableStateOf(initialAnime.name) }
 
@@ -51,6 +53,8 @@ fun EditAnimeForm(onCancel: () -> Unit, initialAnime: Anime) {
     var author by remember { mutableStateOf(initialAnime.author) }
 
     val context = LocalContext.current
+
+    val dbHelper = AnimesDatabaseHelper(context)
 
     /*
     * These values represent a field in the date format, if there is a better way to work with dates in kotlin then it should be done the better way instead of this
@@ -142,7 +146,6 @@ fun EditAnimeForm(onCancel: () -> Unit, initialAnime: Anime) {
 
             OutlinedButton(onClick = {
                 val updatedAnime = Anime(
-                    id = id,
                     name = name,
                     chapters = chapters,
                     description = description,
@@ -150,7 +153,7 @@ fun EditAnimeForm(onCancel: () -> Unit, initialAnime: Anime) {
                     author = author
                 )
 
-                if (!AnimeStore.editAnime(initialAnime, updatedAnime)) {
+                if (!dbHelper.editAnime(initialAnime, updatedAnime)) {
                     Toast.makeText(
                         context,
                         "Make sure to enter all the Information, thank you",
@@ -174,6 +177,7 @@ fun EditAnimeForm(onCancel: () -> Unit, initialAnime: Anime) {
     }
 }
 
+@RequiresApi(Build.VERSION_CODES.P)
 @Composable
 fun EditAnimeFormDialog(
     showDialog: Boolean,

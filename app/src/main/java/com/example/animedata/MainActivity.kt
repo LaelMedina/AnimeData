@@ -40,6 +40,6 @@ fun ViewContainer() {
         topBar = { Toolbar() },
         content = { Content() },
         floatingActionButton = { ButtonAdd() },
-        floatingActionButtonPosition = FabPosition.End
+        floatingActionButtonPosition = FabPosition.Center
     )
 }

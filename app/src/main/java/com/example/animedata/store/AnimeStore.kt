@@ -43,7 +43,7 @@ class AnimeStore {
             }
         }
 
-        fun deleteAnime(animeId: Int): Boolean {
+        fun deleteAnime(animeId: Long): Boolean {
 
             return AnimeData.AnimeList.value.removeIf { it.id == animeId }
 

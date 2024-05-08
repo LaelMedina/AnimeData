@@ -1,5 +1,7 @@
 package com.example.animedata.composables
 
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material3.AlertDialog
@@ -12,6 +14,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 
+@RequiresApi(Build.VERSION_CODES.P)
 @Composable
 fun ButtonAdd() {
 
@@ -31,6 +34,7 @@ fun ButtonAdd() {
 
 }
 
+@RequiresApi(Build.VERSION_CODES.P)
 @Composable
 fun AnimeFormDialog(
     showDialog: Boolean,

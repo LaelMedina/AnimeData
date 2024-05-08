@@ -1,7 +1,9 @@
 package com.example.animedata.composables
 
+import android.os.Build
 import android.widget.DatePicker
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -30,19 +32,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
+import com.example.animedata.data.AnimesDatabaseHelper
 import com.example.animedata.models.Anime
-import com.example.animedata.store.AnimeStore
 import java.util.Calendar
-import kotlin.random.Random
 
+@RequiresApi(Build.VERSION_CODES.P)
 @Composable
 fun AnimeForm(onSubmit: () -> Unit, onCancel: () -> Unit) {
-
-    /*
-        Note: The id property of the Object is not properly initialized due to another Object might get the exact same number
-        for its id leading to possible conflicts in the future, this must be fixed as soon as possible.
-    */
-    val id: Int = Random.nextInt(5, 100001)
 
     var name by remember { mutableStateOf("") }
 
@@ -55,6 +51,8 @@ fun AnimeForm(onSubmit: () -> Unit, onCancel: () -> Unit) {
     var author by remember { mutableStateOf("") }
 
     val context = LocalContext.current
+
+    val dbHelper = AnimesDatabaseHelper(context)
 
 
     /*
@@ -148,7 +146,6 @@ fun AnimeForm(onSubmit: () -> Unit, onCancel: () -> Unit) {
             OutlinedButton(onClick = {
 
                 val newAnime = Anime(
-                    id = id,
                     name = name,
                     chapters = chapters,
                     description = description,
@@ -156,7 +153,7 @@ fun AnimeForm(onSubmit: () -> Unit, onCancel: () -> Unit) {
                     author = author
                 )
 
-                if (!AnimeStore.addAnime(newAnime)) {
+                if (!dbHelper.addAnime(newAnime)) {
                     Toast.makeText(
                         context,
                         "Make sure to enter all the Information, thank you",

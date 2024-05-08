@@ -1,5 +1,7 @@
 package com.example.animedata.composables
 
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.compose.animation.animateContentSize
 import androidx.compose.animation.core.LinearEasing
 import androidx.compose.animation.core.tween
@@ -32,18 +34,27 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.animedata.data.AnimesDatabaseHelper
 import com.example.animedata.models.Anime
 import com.example.animedata.store.AnimeStore
 
 
+@RequiresApi(Build.VERSION_CODES.P)
 @Composable
 fun Content() {
 
-    val animeList: List<Anime> by AnimeStore.getAnimeList()
+    val context = LocalContext.current
+
+    val dbHelper = AnimesDatabaseHelper(context)
+
+    val animeList: List<Anime> by dbHelper.getAnimeList()
+
+//    val animeList: List<Anime> by AnimeStore.getAnimeList()
 
     LazyColumn(
         modifier = Modifier
@@ -60,9 +71,14 @@ fun Content() {
 }
 
 
+@RequiresApi(Build.VERSION_CODES.P)
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ListItemRow(item: Anime) {
+
+    val context = LocalContext.current
+
+    val dbHelper = AnimesDatabaseHelper(context)
 
     val moreInformation = remember { mutableStateOf(false) }
 
@@ -172,7 +188,7 @@ fun ListItemRow(item: Anime) {
                             showDialog = isDeleting,
                             onDismiss = { isDeleting = false },
                             onSubmit = {
-                                AnimeStore.deleteAnime(item.id)
+                                dbHelper.deleteAnime(item.id)
                                 isDeleting = false
                             }
                         )

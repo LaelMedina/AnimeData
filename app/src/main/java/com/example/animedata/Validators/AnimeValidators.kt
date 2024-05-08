@@ -3,6 +3,8 @@ package com.example.animedata.Validators
 import com.example.animedata.models.Anime
 
 class AnimeValidators {
+
+    //Return true if the char sequence is empty
     companion object {
         fun textFieldsValidator(
             newAnime: Anime
