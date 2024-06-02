@@ -37,6 +37,7 @@ import com.example.animedata.models.Anime
 import java.util.Calendar
 
 @RequiresApi(Build.VERSION_CODES.P)
+
 @Composable
 fun AnimeForm(onSubmit: () -> Unit, onCancel: () -> Unit) {
 

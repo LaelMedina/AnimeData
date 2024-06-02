@@ -1,4 +1,6 @@
 <resources>
     <string name="app_name">AnimeData</string>
     <string name="title_activity_anime_form_dialog">AnimeFormDialog</string>
+    <string name="title_activity_user_auth">UserAuthActivity</string>
+    <string name="title_activity_user_register">UserRegisterActivity</string>
 </resources>
